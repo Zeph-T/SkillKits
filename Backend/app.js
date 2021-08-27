@@ -12,15 +12,20 @@ mongoose.connect(process.env.FLIPR_DB_CONN_STRING,{ useNewUrlParser: true, useUn
 });
 
 
-const PORT = process.env.PORT || 8000;
+const port =  8000;
 const app = express();
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(cookieParser());
 
 
-var api = expres.Router();
-require('./src/routes/api.js')(api);
-app.use('/api',api);
+// var api = expres.Router();
+// require('./src/routes/api.js')(api);
+// app.use('/api',api);
+var auth = express.Router();
 require('./src/routes/auth.js')(auth);
 app.use('/auth',auth);
+
+app.listen(port,()=>{
+  console.log(`server listening on PORT ${port}`);
+})
