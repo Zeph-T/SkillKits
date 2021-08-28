@@ -2,6 +2,9 @@
 import Subject from '../models/subject';
 import Student from '../models/student';
 import mongoose from 'mongoose';
+import { getAllAssignments } from './assignment';
+import { getAnnouncements } from './announcements';
+import Q from 'q';
 export function joinSubject(req,res){
     try{
         Subject.findOne({classCode : req.body.classCode}).then(oSub=>{
@@ -54,3 +57,19 @@ export function createSubject(req,res){
 }
 
 
+export function getSubjectData(req,res){
+    try{
+        let getAllAssignmentsPromise = getAllAssignments(req.param.subjectId);
+        let getAllAnnouncementsPromise = getAnnouncements(req.params.subjectId);
+        Q.all([getAllAnnouncementsPromise,getAllAssignmentsPromise]).then(data=>{
+            return res.status(200).send({
+                assignments : data[1],
+                announcements : data[0]
+            })
+        }).catch(err=>{
+            return res.status(400).send({error : err});
+        })
+    }catch(err){
+        return res.status(400).send({error: err});
+    }
+}

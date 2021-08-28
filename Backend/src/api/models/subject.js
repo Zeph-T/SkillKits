@@ -22,7 +22,11 @@ const SubjectSchema = mongoose.Schema({
     Students : [{
         type:mongoose.Types.ObjectId,
         ref: 'Student'
-    }]
+    }],
+    isValid : {
+        type : Boolean,
+        default : true
+    }
 })
 
 

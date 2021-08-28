@@ -1,6 +1,9 @@
 // all the api routes
 import * as apiHelper from '../api/controllers/apiHelper';
 import * as subjectApi from '../api/controllers/subject';
+import * as announcementApi from '../api/controllers/announcements';
+import * as assignmentApi from '../api/controllers/assignment';
+
 
 module.exports = (router) => {
     router.use(function(req,res,next){
@@ -23,4 +26,8 @@ module.exports = (router) => {
     });
     router.post('/joinSubject',subjectApi.joinSubject);
     router.post('/createSubject',apiHelper.isAdmin , subjectApi.createSubject);
+    router.post('/postAnnouncement',apiHelper.isAdmin,announcementApi.AddAnouncement);
+    router.post('/postTestOrAssignment',apiHelper.isAdmin,assignmentApi.addAssignment);
+    router.get('/getSubjectData/:subjectId',subjectApi.getSubjectData);
+
 }
