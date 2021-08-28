@@ -7,9 +7,6 @@ const ScheduleSchema = mongoose.Schema({
     },
     scheduledAt : {
         type:Date
-    },
-    meetLink  : {
-        type:String
     }
 });
  

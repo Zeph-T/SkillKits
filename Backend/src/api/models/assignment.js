@@ -14,18 +14,16 @@ const AssignmentSchema = mongoose.Schema({
         type:Boolean
     },
     submissionLink  : {
-        type:String
+        type:String,
+        required : true
     },
-    classCode : {
-        type: String
+    subjectId : {
+        type: mongoose.Types.ObjectId,
+        ref : 'Subject'
     },
     submittedAt : {
         type:Date,
         default  : Date.now
-    },
-    facultyId : {
-        type:mongoose.Types.ObjectId,
-        ref:'Faculty'
     }
 })
 

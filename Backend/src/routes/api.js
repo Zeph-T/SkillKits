@@ -3,7 +3,7 @@ import * as apiHelper from '../api/controllers/apiHelper';
 import * as subjectApi from '../api/controllers/subject';
 import * as announcementApi from '../api/controllers/announcements';
 import * as assignmentApi from '../api/controllers/assignment';
-
+import * as scheduleApi from '../api/controllers/schedule';
 
 module.exports = (router) => {
     router.use(function(req,res,next){
@@ -29,5 +29,7 @@ module.exports = (router) => {
     router.post('/postAnnouncement',apiHelper.isAdmin,announcementApi.AddAnouncement);
     router.post('/postTestOrAssignment',apiHelper.isAdmin,assignmentApi.addAssignment);
     router.get('/getSubjectData/:subjectId',subjectApi.getSubjectData);
-
+    router.post('/scheduleClass',apiHelper.isAdmin , scheduleApi.scheduleClass);
+    router.get('/getSchedule',scheduleApi.getSchedule);
+    router.post('/submitAssignment');
 }
