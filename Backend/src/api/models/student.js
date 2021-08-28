@@ -8,6 +8,10 @@ const studentSchema = mongoose.Schema({
         lowercase : true
     },
     password : {type: String},
+    authToken : {
+        type:String,
+        default :  ""
+    },
     activeClasses : [{
         type:mongoose.Types.ObjectId,
         ref : 'Subject'

@@ -19,9 +19,9 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(cookieParser());
 
 
-// var api = expres.Router();
-// require('./src/routes/api.js')(api);
-// app.use('/api',api);
+var api = express.Router();
+require('./src/routes/api.js')(api);
+app.use('/api',api);
 var auth = express.Router();
 require('./src/routes/auth.js')(auth);
 app.use('/auth',auth);
