@@ -186,3 +186,18 @@ export function isAuthenticatedUser(req){
     })
     return deferred.promise;
 }
+
+export function checkForLoggedInUser(req,res){
+    try{
+        if(req.user){
+            let user = req.user;
+            res.status(200);
+            return res.json(user);
+        }else{
+            res.status(400);
+            return res.send({error : 'Not LoggedIn'});
+        }
+    }catch(err){
+        return res.status(400).send({error : err});
+    }
+}

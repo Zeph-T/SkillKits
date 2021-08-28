@@ -24,6 +24,7 @@ module.exports = (router) => {
         // console.log("In / route",req.user);
         return res.send({message : "Working!"} );
     });
+    router.get('/checkForLoggedInUser',apiHelper.checkForLoggedInUser);
     router.post('/joinSubject',subjectApi.joinSubject);
     router.post('/createSubject',apiHelper.isAdmin , subjectApi.createSubject);
     router.post('/postAnnouncement',apiHelper.isAdmin,announcementApi.AddAnouncement);
@@ -31,5 +32,5 @@ module.exports = (router) => {
     router.get('/getSubjectData/:subjectId',subjectApi.getSubjectData);
     router.post('/scheduleClass',apiHelper.isAdmin , scheduleApi.scheduleClass);
     router.get('/getSchedule',scheduleApi.getSchedule);
-    router.post('/submitAssignment');
+    router.post('/submitAssignment',assignmentApi.submitAssignment);
 }
