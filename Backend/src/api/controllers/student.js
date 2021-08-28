@@ -64,7 +64,7 @@ export function login(req,res){
             email : userInfo.email
         }).then(user=>{
             if(user.validPassword(userInfo.password)){
-                validateUser(req,res,user);
+                validateUser(req,res,user,false);
             }else{
                 return res.status(404).send({error:'Password Invalid!'});
             }
