@@ -107,7 +107,7 @@ export function validateToken(token,tokenType){
     })
     return deferred.promise;
 }
-export function validateUser(req,res,user){
+export function validateUser(req,res,user,isFaculty){
     validateToken(user.authToken , TokenTypes.authToken).then(response=>{
         if(response.isValid){
             res.status(200);
@@ -119,6 +119,7 @@ export function validateUser(req,res,user){
     }).catch(function(){
         user.authToken = jwt.sign({
             email :  user.email,
+            isFaculty : isFaculty,
             type:TokenTypes.authToken
         },ConfigAuth.token.secret,{expiresIn : '10 days'});
         user.save(function(err){
@@ -141,16 +142,30 @@ export function isAuthenticatedUser(req){
     this.validateToken(req.cookies.AccessToken,TokenTypes.authToken).then(response=>{
         if(response.isValid){
             req.user = response.payload;
-            Student.findOne({email : req.user.email.toLowerCase()}).lean().then(user=>{
-                if(!user){
+            if(!response.isFaculty){
+                Student.findOne({email : req.user.email.toLowerCase()}).lean().then(user=>{
+                    if(!user){
+                        deferred.reject(false);
+                    }else{
+                        req.user = user;
+                        deferred.resolve(true);
+                    }
+                }).catch(err=>{
                     deferred.reject(false);
-                }else{
-                    req.user = user;
-                    deferred.resolve(true);
-                }
-            }).catch(err=>{
-                deferred.reject(false);
-            })
+                })
+            }else{
+                Faculty.findOne({email : req.user.email.toLowerCase()}).lean().then(user=>{
+                    if(!user){
+                        deferred.reject(false);
+                    }else{
+                        req.user = user;
+                        deferred.resolve(true);
+                    }
+                }).catch(err=>{
+                    deferred.reject(false);
+                })
+            }
+
         }else{
             deferred.resolve(false);
         }
