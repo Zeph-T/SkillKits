@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-// all the api routes
-=======
 // all the api routes
 import * as apiHelper from '../api/controllers/apiHelper';
 import * as subjectApi from '../api/controllers/subject';
@@ -27,4 +24,3 @@ module.exports = (router) => {
     router.post('/joinSubject',subjectApi.joinSubject);
     router.post('/createSubject',apiHelper.isAdmin , subjectApi.createSubject);
 }
->>>>>>> Stashed changes
