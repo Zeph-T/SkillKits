@@ -1,6 +1,6 @@
 // all the student related controllers
 import Student from '../models/student';
-import { emailContexts,validateUserEmail,sendEmail } from "./apiHelper";
+import { emailContexts,validateUserEmail,sendEmail ,validateUser} from "./apiHelper";
 import fetch from 'node-fetch';
 
 export function signup(req,res){
@@ -25,7 +25,7 @@ export function signup(req,res){
                             let newStudent = new Student;
                             newStudent.name = userInfo.name;
                             newStudent.email = userInfo.email;
-                            newStudent.password = newStudent.generateHash(userInfo.email);
+                            newStudent.password = newStudent.generateHash(userInfo.password);
                             newStudent.save(function(err){
                                 if(err){
                                     return res.status(400).send({error:err.stack});
@@ -49,5 +49,30 @@ export function signup(req,res){
             })
     }catch(err){
         return res.status(400).send(err.stack);
+    }
+}
+
+
+
+export function login(req,res){
+    try{
+        let userInfo = req.body;
+        if(!userInfo || !userInfo.email || !userInfo.password){
+            return res.status(400).send({error : 'Missing Fields!'});
+        }
+        Student.findOne({
+            email : userInfo.email
+        }).then(user=>{
+            if(user.validPassword(userInfo.password)){
+                validateUser(req,res,user);
+            }else{
+                return res.status(404).send({error:'Password Invalid!'});
+            }
+        }).catch(err=>{
+            console.log(err);
+            return res.status(400).send({error : err.stack});
+        })
+    }catch(err){
+        return res.status(400).send({error : err.stack});
     }
 }
