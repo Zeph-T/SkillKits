@@ -1,5 +1,8 @@
 // all the authorisation routes
 import * as StudentApi from '../api/controllers/student';
+import * as FacultyApi from '../api/controllers/faculty';
+
+
 
 module.exports = (router) => {
     router.get('/',(req,res)=>{
@@ -8,6 +11,10 @@ module.exports = (router) => {
     });
     router.post('/studentsignup',StudentApi.signup);
     router.post('/studentlogin',StudentApi.login);
+    router.post('/facultylogin',FacultyApi.login);
+    router.post('/facultysignup',FacultyApi.signup);
+
+    
     router.get('/logout',(req,res)=>{
         res.cookie('AccessToken','',{
             expires : new Date(Date.now())
