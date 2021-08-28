@@ -111,7 +111,7 @@ export const validateUserEmail = (email ,isStudent, checkForExistingUser)=> {
 export function validateToken(token,tokenType){
     var deferred = Q.defer();
     jwt.verify(token,ConfigAuth.token.secret,function(err,decoded){
-        if(!err && decoded && (tokenType && tokenType == decoded.type)){
+        if(!err && decoded && (tokenType && tokenType === decoded.type)){
             deferred.resolve({isValid : true , payload : decoded});
         }else{
             deferred.reject(false);

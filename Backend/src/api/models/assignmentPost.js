@@ -4,10 +4,7 @@ const AssignmentPostSchema = mongoose.Schema({
     name : { 
         type:String,
     },
-    submissionTime : {
-        type:Date
-    },
-    submissionDate : {
+    deadline : {
         type:Date
     },
     postedOn  : {
@@ -17,8 +14,9 @@ const AssignmentPostSchema = mongoose.Schema({
     content : {
         type:String
     },
-    classCode : {
-        type:String
+    subjectId : {
+        type : mongoose.Types.ObjectId,
+        ref : 'Subject'
     }
 })
 
