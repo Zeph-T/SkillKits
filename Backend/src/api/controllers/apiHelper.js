@@ -25,6 +25,18 @@ export const TokenTypes = {
     authToken : 'authToken'
 }
 
+
+export function isAdmin(req,res,next){
+    if(req.user){
+        if(req.user.isAdmin){
+            next();
+        }else{
+            return res.status(408).send({error : 'Access Forbidden !'})
+        }
+    }else{
+        return res.status(400).send({error : 'Login First!'});
+    }
+}
 export function sendEmail(email,context,data={}){
     var deferred = Q.defer();
     var transpoter = nodemailer.createTransport({
@@ -142,7 +154,7 @@ export function isAuthenticatedUser(req){
     this.validateToken(req.cookies.AccessToken,TokenTypes.authToken).then(response=>{
         if(response.isValid){
             req.user = response.payload;
-            if(!response.isFaculty){
+            if(!response.payload.isFaculty){
                 Student.findOne({email : req.user.email.toLowerCase()}).lean().then(user=>{
                     if(!user){
                         deferred.reject(false);

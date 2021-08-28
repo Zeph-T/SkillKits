@@ -5,11 +5,12 @@ import randtoken from 'rand-token';
 
 const SubjectSchema = mongoose.Schema({
     name : {
-        type:String
+        type:String,
+        required : true
     },
     classCode : {
         type:String,
-        defualt : function(){
+        default : function(){
             return randtoken.generate(5)
         },
         unique : true
@@ -23,3 +24,6 @@ const SubjectSchema = mongoose.Schema({
         ref: 'Student'
     }]
 })
+
+
+export default mongoose.model('Subject',SubjectSchema);
