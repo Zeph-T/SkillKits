@@ -23,7 +23,11 @@ const studentSchema = mongoose.Schema({
     completedTests : [{
         type:mongoose.Types.ObjectId,
         ref : 'AssignmentPost'
-    }]
+    }],
+    isAdmin  : {
+        type:Boolean,
+        default : false
+    }
 })
 
 
