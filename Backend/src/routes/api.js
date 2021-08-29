@@ -4,9 +4,14 @@ import * as subjectApi from '../api/controllers/subject';
 import * as announcementApi from '../api/controllers/announcements';
 import * as assignmentApi from '../api/controllers/assignment';
 import * as scheduleApi from '../api/controllers/schedule';
+import * as studentApi from '../api/controllers/student';
+import * as facultyApi from '../api/controllers/faculty';
 
 module.exports = (router) => {
     router.use(function(req,res,next){
+        req.cookies = {
+            AccessToken : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhdWwuemVwaEBnbWFpbC5jb20iLCJpc0ZhY3VsdHkiOnRydWUsInR5cGUiOiJhdXRoVG9rZW4iLCJpYXQiOjE2MzAyNjkwMTIsImV4cCI6MTYzMTEzMzAxMn0.71ECzAI4yr4pc4Zp-ohm45hqwVby1PW-gtEiwJqb5vA'
+        }
         apiHelper.isAuthenticatedUser(req).then(isValid=>{
             if(isValid){
                 next();
@@ -32,5 +37,8 @@ module.exports = (router) => {
     router.get('/getSubjectData/:subjectId',subjectApi.getSubjectData);
     router.post('/scheduleClass',apiHelper.isAdmin , scheduleApi.scheduleClass);
     router.get('/getSchedule',scheduleApi.getSchedule);
+    router.get('/getFacultySchedule',apiHelper.isAdmin ,scheduleApi.getFacultySchedule);
     router.post('/submitAssignment',assignmentApi.submitAssignment);
+    router.get('/getStudentSubjects',studentApi.getAllSubjects);
+    router.get('/getFacultySubjects',apiHelper.isAdmin ,facultyApi.getAllSubjects);
 }

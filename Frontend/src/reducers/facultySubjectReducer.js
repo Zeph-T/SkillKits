@@ -7,6 +7,10 @@ export default function facultySubjectReducer(state=initialState.facultySubjects
         case types.GET_MY_TEACHING_SUBJECTS_SUCCESS : {
             return action.subjects
         }
+        case types.CREATE_SUBJECT_SUCCESS : {
+            let userInfo = JSON.parse(JSON.stringify(state));
+            userInfo.push(action.subject);
+        }
         default : return state;
     }
 }

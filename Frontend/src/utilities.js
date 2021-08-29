@@ -12,5 +12,9 @@ export const api = {
     GET_SUBJECT_DATA_URL : 'api/getSubjectData',
     SCHEDULE_CLASS_URL  :'api/scheduleClass',
     SUBMIT_ASSIGNMENT_URL : 'api/submitAssignment',
-    LOGOUT_URL  : 'auth/logout'
+    LOGOUT_URL  : 'auth/logout',
+    GET_FACULTY_SCHEDULE_URL : 'api/getFacultySchedule',
+    GET_STUDENT_SCHEDULE_URL  : 'api/getSchedule',
+    GET_STUDENTS_SUBJECT_URL  : 'api/getStudentSubjects',
+    GET_FACULTY_SUBJECT_URL : 'api/getFacultySubjects'
 }

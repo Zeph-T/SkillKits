@@ -2,18 +2,18 @@ import {combineReducers} from 'redux';
 import * as types from '../actions/actionTypes';
 import { loggedInUserReducer as checkingForLoggedinUser } from './loggedInUserReducer';
 import user from './userReducer';
-import studentAssignmentReducer from './studentAssignmentReducer';
-import facultyAssignmentReducer from './facultyAssignmentReducer';
-import studentSubjectReducer from './StudentSubjectReducer';
-import facultySubjectReducer from './facultySubjectReducer';
+import studentAssignments from './studentAssignmentReducer';
+import facultyAssignments from './facultyAssignmentReducer';
+import studentSubjects from './StudentSubjectReducer';
+import facultySubjects from './facultySubjectReducer';
 
 const appReducer = combineReducers({
     user,
     checkingForLoggedinUser,
-    facultyAssignmentReducer,
-    facultySubjectReducer,
-    studentAssignmentReducer,
-    studentSubjectReducer,
+    facultyAssignments,
+    facultySubjects,
+    studentAssignments,
+    studentSubjects,
 });
 
 const rootReducer = (state,action)=>{
