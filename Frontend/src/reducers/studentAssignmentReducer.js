@@ -2,7 +2,7 @@ import initialState from "./initialState";
 import * as types from '../actions/actionTypes';
 
 
-export default function assignmentReducer(state=initialState,action){
+export default function assignmentReducer(state=initialState.studentAssignments,action){
     let userObject = {};
     switch(action.type){
         case types.GET_MY_ASSIGNMENTS_SUCCESS : {

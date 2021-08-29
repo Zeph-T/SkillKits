@@ -7,6 +7,11 @@ export default function postedAssignmentReducer(state=initialState.postedAssignm
         case types.GET_MY_POSTED_ASSIGNMENTS_SUCCESS  : {
             return action.assignments;
         }
+        case types.POST_ASSIGNMEMT_SUCCESS : {
+            let userInfo = JSON.parse(JSON.stringify(state));
+            userInfo.push(action);
+            return userInfo;
+        }
         default : return state;
     }
 }

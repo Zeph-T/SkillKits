@@ -6,7 +6,11 @@ export default function studentSubjectReducer(state=initialState.studentSubjects
     switch(action.type){
         case types.GET_MY_SUBJECTS_SUCCESS : {
             return action.subjects
-        }
+        };
+        case types.JOIN_SUBJECT_SUCCESS : 
+            let userInfo = JSON.parse(JSON.stringify(state));
+            userInfo.push(action);
+            return userInfo;
         default : return state;
     }
 }

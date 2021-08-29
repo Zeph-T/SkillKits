@@ -34,6 +34,18 @@ export function getSchedule(req,res){
             throw "Missing Fields";
         }
     }catch(err){
-        return res.status(400).send({error : err});
+        return res.status(400).send({error : err.stack});
+    }
+}
+
+export function getFacultySchedule(req,res){
+    try{
+        Schedule.find({subjectId : {$in : req.user.teachingSubjects}}).then(oSchedule=>{
+            return res.status(200).send(oSchedule);
+        }).catch(err=>{
+            return res.status(400).send({error : err.stack});
+        })
+    }catch(err){
+        return res.status(400).send({error : err.stack});
     }
 }

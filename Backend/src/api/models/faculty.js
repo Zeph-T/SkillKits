@@ -12,10 +12,10 @@ const FacultySchema = mongoose.Schema({
     password  : {
         type:String
     },
-    subjectIds : {
+    teachingSubjects : [{
         type:mongoose.Types.ObjectId,
         ref : 'Subject'
-    },
+    }],
     assignmentsPosted :[{
         type:mongoose.Types.ObjectId,
         ref : 'AssignmentPost'
