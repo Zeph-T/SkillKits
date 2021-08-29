@@ -3,9 +3,10 @@ import {render} from 'react-dom';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import { checkForLoggedInUser } from './actions/userActions';
+import {Route , HashRouter as Router} from 'react-router-dom';
+import App from './components/App/App';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// import App from './App';
 
 const store = configureStore();
 
@@ -32,7 +33,9 @@ store.dispatch(checkForLoggedInUser()).then(user=>{
 render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <Route path='/' component={App} />
+       </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
