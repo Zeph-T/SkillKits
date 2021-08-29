@@ -1,6 +1,10 @@
 import logo from './logo.svg';
+import React from 'react';
+import { Route,Redirect , withRouter } from 'react-router-dom';
 import './App.css';
-
+/*
+  
+*/
 function App() {
   return (
     <div className="App">
@@ -18,6 +22,10 @@ function App() {
           App Page!
         </a>
       </header>
+      <div>
+        {/* <Route exact path="/landing" render={()=> Component} />  create Authorisation and landing page components Seperately
+        <Route exact path="/login" render={()=>component } /> */}
+      </div>  
     </div>
   );
 }

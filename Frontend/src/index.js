@@ -27,7 +27,7 @@ store.dispatch(checkForLoggedInUser()).then(user=>{
     }
   */
 }).catch(err=>{
-  window.location.hash = '/login';
+  window.location.hash = '/';
 })
 
 render(
