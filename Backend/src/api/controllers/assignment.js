@@ -18,9 +18,10 @@ export function getAllAssignments(subjectId){
 export function addAssignment(req,res){
     try{
         if(req.body && req.body.name && req.body.deadline && req.body.content && req.body.subjectId){
-            newAssignment = new AssignmentPost;
+            let newAssignment = new AssignmentPost;
             newAssignment.name = req.body.name;
-            newAssignment.deadline = new Date(req.body.deadline);
+            newAssignment.deadline = new Date();
+            // newAssignment.deadline = new Date(req.body.deadline);
             newAssignment.content = req.body.content;
             newAssignment.subjectId = mongoose.Types.ObjectId(req.body.subjectId);
             newAssignment.save((err,doc)=>{
@@ -72,3 +73,6 @@ export function submitAssignment(req,res){
         return res.status(400).send({error : err});
     }
 }
+
+
+

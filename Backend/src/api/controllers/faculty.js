@@ -2,7 +2,7 @@
 import Faculty from '../models/faculty';
 import { emailContexts,validateUserEmail,sendEmail ,validateUser} from "./apiHelper";
 import fetch from 'node-fetch';
-
+import Subject from '../models/subject';
 
 export function signup(req,res){
     try{
@@ -77,5 +77,22 @@ export function login(req,res){
         })
     }catch(err){
         return res.status(400).send({error : err.stack});
+    }
+}
+
+
+export function getAllSubjects(req,res){
+    try{    
+        if(req.user){
+            Subject.find({_id : {$in : req.user.teachingSubjects}}).then(oSub=>{
+                return res.status(200).send(oSub);
+            }).catch(err=>{
+                return res.status(400).send({error : err.stack});
+            })
+        }else{
+            throw 'Request User Missing';
+        }
+    }catch(err){
+        return res.status(400).send({error : err});
     }
 }

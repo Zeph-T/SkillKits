@@ -2,6 +2,8 @@
 import Subject from '../models/subject';
 import Student from '../models/student';
 import Schedule from '../models/schedule';
+import Assignment from '../models/assignment';
+import Faculty from '../models/faculty';
 import mongoose from 'mongoose';
 import { getAllAssignments } from './assignment';
 import { getAnnouncements } from './announcements';
@@ -41,12 +43,18 @@ export function createSubject(req,res){
             let newSubject  = new Subject;
             newSubject.name = req.body.name;
             newSubject.faculty = [];
-            newSubject.faculty.push(mongoose.Types.ObjectId(req.user.id));
+            newSubject.faculty.push(mongoose.Types.ObjectId(req.user._id));
             newSubject.save(err=>{
                 if(err){
                     return res.status(400).send({error : err});
                 }else{
-                    return res.status(200).send(newSubject);
+                    Faculty.findOneAndUpdate({_id : mongoose.Types.ObjectId(req.user._id)},{$push : {teachingSubjects : mongoose.Types.ObjectId(newSubject._id)}},(err,doc)=>{
+                        if(err){
+                            return res.status(400).send({error : err.stack});
+                        }else{
+                            return res.status(200).send(newSubject);
+                        }
+                    });
                 }
             })
         }else{
@@ -60,7 +68,7 @@ export function createSubject(req,res){
 
 export function getSubjectData(req,res){
     try{
-        let getAllAssignmentsPromise = getAllAssignments(req.param.subjectId);
+        let getAllAssignmentsPromise = getAllAssignments(req.params.subjectId);
         let getAllAnnouncementsPromise = getAnnouncements(req.params.subjectId);
         Q.all([getAllAnnouncementsPromise,getAllAssignmentsPromise]).then(data=>{
             return res.status(200).send({
@@ -75,3 +83,15 @@ export function getSubjectData(req,res){
     }
 }
 
+
+// export function getUserAssignments(req,res){
+//     try{
+//         if(req.user){
+            
+//         }else{
+//             throw 'Request User Object Missing';
+//         }
+//     }catch(err){
+//         return res.status(400).send({error : err.stack});
+//     }
+// }
