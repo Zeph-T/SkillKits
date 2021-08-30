@@ -8,6 +8,7 @@ export function AddAnouncement(req,res){
             let newAnnouncement = new Announcement;
             newAnnouncement.content = req.body.content;
             newAnnouncement.subjectId = mongoose.Types.ObjectId(req.body.subjectId);
+            newAnnouncement.postedBy = req.user.name;
             newAnnouncement.save((err,doc)=>{
                 if(err){
                     return res.status(400).send(err.stack);

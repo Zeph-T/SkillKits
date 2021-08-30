@@ -27,6 +27,10 @@ export function getScheduleSuccess(schedule){
     return {type:types.GET_MY_SCHEDULE_SUCCESS ,schedule};
 }
 
+export function logoutUserSucess(){
+    return {type : types.LOGOUT_USER_SUCCESS };
+}
+
 export function checkForLoggedInUser(){
     return function (dispatch,getState){
         dispatch(beginCheckForLoggedInUser());
@@ -183,4 +187,21 @@ export function getSubjectData(subjectId){
         }
         return data;
     })
+}
+
+export function logoutUser(){
+    return function(dispatch,getState){
+        return fetch(api.BASE_URL + api.LOGOUT_URL , {
+            method : 'get',
+            headers : options
+        }).then(response=>{
+            return response.json();
+        }).then(result=>{
+            if(result.error){
+                throw result.error;
+            }
+            dispatch(logoutUserSucess());
+            return result;
+        })
+    }
 }

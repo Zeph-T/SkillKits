@@ -7,6 +7,11 @@ export default function assignmentReducer(state=initialState.schedule,action){
         case types.GET_MY_SCHEDULE_SUCCESS : {
             return action.schedule;
         }
+        case types.SCHEDULE_CLASS_SUCCESS : {
+            let userInfo = JSON.parse(JSON.stringify(state));
+            userInfo.unshift(action.schedule);
+            return userInfo;
+        }
         default : return state;
     }
 }

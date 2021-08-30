@@ -17,6 +17,10 @@ export function createSubjectSuccess(subject){
 //     return {type : types.POST_ASSIGNMENT_SUCCESS , assignment};
 // }
 
+export function postScheduleSuccess(schedule){
+    return {type : types.SCHEDULE_CLASS_SUCCESS , schedule};
+}
+
 export function login(userInfo){
     return function(dispatch,getState){
         return fetch(api.BASE_URL + api.FACULTY_LOGIN_URL,{
@@ -101,6 +105,25 @@ export function postAnnouncement(userData){
             if(data.error){
                 throw data.error;
             }
+            return data;
+        })
+    }
+}
+
+
+export function postSchedule(userData){
+    return function(dispatch,getState){
+        return fetch(api.BASE_URL + api.SCHEDULE_CLASS_URL , {
+            method : 'post',
+            headers : options,
+            body:JSON.stringify(userData)
+        }).then(function(response){
+            return response.json();
+        }).then(data=>{
+            if(data.error){
+                throw data.error;
+            }
+            dispatch(postScheduleSuccess(data));
             return data;
         })
     }

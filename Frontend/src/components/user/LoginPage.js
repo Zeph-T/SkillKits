@@ -50,12 +50,10 @@ function LoginPage(props){
         }
         if(isAdmin){
             dispatch(facultyActions.login(data)).then(result=>{
-                console.log(result);
                 localStorage.setItem("AccessToken",result.authToken);
-                console.log(localStorage.getItem("AccessToken"));
-                dispatch(userActions.getMyTeachingSubjects()).then(()=>{
-                })
                 dispatch(userActions.getTeachingSchedule()).then(()=>{
+                })
+                dispatch(userActions.getMyTeachingSubjects()).then(()=>{
                 })
                 props.openSnackBar("Login Success!");
                 setLoginIsInProgress(false);
@@ -67,15 +65,14 @@ function LoginPage(props){
             })
         }else{
             dispatch(userActions.login(data)).then(result=>{
-                console.log(result);
                 localStorage.setItem("AccessToken",result.authToken);
-                dispatch(userActions.getMySujects()).then(()=>{
-                })
                 dispatch(userActions.getStudentSchedule()).then(()=>{
                 });
+                dispatch(userActions.getMySujects()).then(()=>{
+                })
+                redirectToHomePage();                
                 props.openSnackBar("Login Success!");
                 setLoginIsInProgress(false);
-                redirectToHomePage();                
             }).catch(err=>{
                 setLoginIsInProgress(false);
                 props.openSnackBar(err.stack);

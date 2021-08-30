@@ -46,7 +46,7 @@ function App(props) {
     <div>
         {userState._id ? <Header history={props.history} theme={props.theme} /> : null}
       <Container>
-        {/* <Route exact path="/" render={(props)=>{
+        <Route exact path="/" render={(props)=>{
           if(userState._id){
             props.history.push("/home");
             // props.location.hash = 'home';
@@ -54,7 +54,7 @@ function App(props) {
           }else{
             // return <
           }
-        }} /> */}
+        }} />
         {/* <Route exact path="/landing" render={()=> Component} />  create Authorisation and landing page omponents Seperately */}
         <Route exact path="/login" render={(props)=><LoginPage openSnackBar={openSnackBar} {...props}/> } />
         <Route exact path="/signup" render={(props)=><SignUpPage openSnackBar={openSnackBar} {...props} /> } />

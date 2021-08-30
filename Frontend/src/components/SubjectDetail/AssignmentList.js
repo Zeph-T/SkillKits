@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import assignmentImage from '../../images/assignment.png'
-
+import EmptyAssignmentLogo from '../../images/noAssignment.svg'
 const useStyles = makeStyles((theme) => ({
   item: {
     border: '1px solid lightgray',
@@ -88,7 +88,12 @@ const AssignmentList = (props) => {
     <>
       <List className={classes.list}>
         <h2 style={{ textAlign: 'center' }}>Assignments</h2>
-        {assignments && assignments.map((ann) => {
+        {
+          assignments === undefined  || assignments && assignments.length === 0? 
+          <div>
+            <img style={{maxWidth : '35rem',maxHeight : '40rem'}} src={EmptyAssignmentLogo} alt="logo" />
+          </div> : 
+        assignments.map((ann) => {
           {
             console.log(ann)
           }
