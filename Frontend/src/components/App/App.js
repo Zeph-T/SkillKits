@@ -1,16 +1,37 @@
 import logo from './logo.svg';
 import React from 'react';
 import { Route,Redirect , withRouter } from 'react-router-dom';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { LinearProgress } from '@material-ui/core';
 import {useSelector} from 'react-redux';
+import LoginPage from '../user/LoginPage';
+import SignUpPage from '../user/SignUpPage';
+import DashboardPage from '../user/dashboardPage';
+import CustomSnackBar from '../common/SnackBar'
+import Header from '../Header/header';
+import { Container } from '@material-ui/core';
+import DetailScreen from '../user/detailScreen';
+import AssignmentDetailScreen from '../user/assignmentDetailScreen';
 import './App.css';
 /*
   
 */
-function App() {
+function App(props) {
+  const oSnackBar = React.createRef();
+  
+  let openSnackBar = (message) => {
+    if(oSnackBar.current){
+      oSnackBar.current.openSnackBar(message);
+    }
+  }
+  
+  let closeSnackBar = () => {
+    if(oSnackBar.current){
+      oSnackBar.current.closeSnackBar();
+    }
+  }
+  
   const checkingForLoggedinUser = useSelector(state => state.checkingForLoggedinUser);
-  const tempState = useSelector(state=>state);
+  const userState = useSelector(state=>state.user);
   if(checkingForLoggedinUser === true){
     return (
       <div className="verticalCenterAligned">
@@ -21,26 +42,29 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {/* Edit <code>src/App.js</code> and save to reload. */}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          App Page!
-        </a>
-      </header>
-      <div>
-        {/* <Route exact path="/landing" render={()=> Component} />  create Authorisation and landing page omponents Seperately
-        <Route exact path="/login" render={()=>component } /> */}
-      </div>  
-    </div>
+    // <div className="App">
+    <div>
+        {userState._id ? <Header history={props.history} theme={props.theme} /> : null}
+      <Container>
+        {/* <Route exact path="/" render={(props)=>{
+          if(userState._id){
+            props.history.push("/home");
+            // props.location.hash = 'home';
+            // return <DashboardPage openSnackBar={openSnackBar} {...props} />
+          }else{
+            // return <
+          }
+        }} /> */}
+        {/* <Route exact path="/landing" render={()=> Component} />  create Authorisation and landing page omponents Seperately */}
+        <Route exact path="/login" render={(props)=><LoginPage openSnackBar={openSnackBar} {...props}/> } />
+        <Route exact path="/signup" render={(props)=><SignUpPage openSnackBar={openSnackBar} {...props} /> } />
+        <Route exact path='/home' render={(props)=><DashboardPage  openSnackBar={openSnackBar} {...props} /> } />
+        <Route exact path='/subject/:subjectId' render={(props)=> <DetailScreen openSnackBar={openSnackBar} {...props} />} />
+        <Route exact path="/subject/assignment/:assignmentId" render={(props)=> <AssignmentDetailScreen openSnackBar={openSnackBar} {...props} /> } />
+        <CustomSnackBar ref={oSnackBar} />
+      </Container> 
+    </div> 
+    // </div>
   );
 }
 

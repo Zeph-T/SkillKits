@@ -12,8 +12,8 @@ export function joinSubject(req,res){
     try{
         Subject.findOne({classCode : req.body.classCode,isValid : true}).then(oSub=>{
             if(oSub){
-                Student.findOneAndUpdate({_id : mongoose.Types.ObjectId(req.user._id)},{$push : { activeClasses : oSub._id }},{new : true}).then(oUser=>{
-                    oSub.Students.push(mongoose.Types.ObjectId(req.user._id));
+                Student.findOneAndUpdate({_id :req.user._id},{$push : { activeClasses : oSub._id }},{new : true}).then(oUser=>{
+                    oSub.Students.push(req.user._id);
                     oSub.save((err,doc)=>{
                         if(err){
                             throw err;
@@ -34,7 +34,17 @@ export function joinSubject(req,res){
         return res.status(400).send({error : err});
     }
 }
-
+export function getSubjectDetail(subjectId){
+    let deferred = Q.defer();
+    try{
+        Subject.findById(mongoose.Types.ObjectId(subjectId)).then(oSub=>{
+            deferred.resolve(oSub);
+        })
+    }catch(err){
+        deferred.reject(err.stack);
+    }
+    return deferred.promise;
+}
 
 
 export function createSubject(req,res){
@@ -70,10 +80,14 @@ export function getSubjectData(req,res){
     try{
         let getAllAssignmentsPromise = getAllAssignments(req.params.subjectId);
         let getAllAnnouncementsPromise = getAnnouncements(req.params.subjectId);
-        Q.all([getAllAnnouncementsPromise,getAllAssignmentsPromise]).then(data=>{
+        let getSubjectDataPromise  = getSubjectDetail(req.params.subjectId);
+        Q.all([getAllAnnouncementsPromise,getAllAssignmentsPromise,getSubjectDataPromise]).then(data=>{
             return res.status(200).send({
                 assignments : data[1],
-                announcements : data[0]
+                announcements : data[0],
+                name : data[2].name,
+                classCode : data[2].classCode,
+                faculty : data[2].facultyNames
             })
         }).catch(err=>{
             return res.status(400).send({error : err});

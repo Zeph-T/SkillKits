@@ -1,7 +1,10 @@
 import {api} from '../utilities';
 import * as types from './actionTypes';
 
-
+const options = {
+    "Content-Type" : "application/json",
+    "AccessToken" : localStorage.getItem('AccessToken')
+}
 export function loginUserSuccess(user){
     return {type : types.LOGIN_USER_SUCCESS , user};
 }
@@ -10,17 +13,15 @@ export function createSubjectSuccess(subject){
     return {type : types.CREATE_SUBJECT_SUCCESS , subject};
 }
 
-export function postAssigmentSuccess(assignment){
-    return {type : types.POST_ASSIGNMENT_SUCCESS , assignment};
-}
+// export function postAssigmentSuccess(assignment){
+//     return {type : types.POST_ASSIGNMENT_SUCCESS , assignment};
+// }
 
 export function login(userInfo){
     return function(dispatch,getState){
         return fetch(api.BASE_URL + api.FACULTY_LOGIN_URL,{
             method : 'post',
-            headers : {
-                "Content-Type" : "application/json"
-            },
+            headers : options,
             body : JSON.stringify(userInfo)
         }).then(function(response){
             return response.json();
@@ -36,12 +37,9 @@ export function login(userInfo){
 
 
 export function signup(userInfo){
-    return function(dispatch,getState){
         return fetch(api.BASE_URL + api.FACULTY_SIGNUP_URL,{
             method : 'post',
-            headers : {
-                "Content-Type" : "application/json"
-            },
+            headers : options,
             body : JSON.stringify(userInfo)
         }).then(function(response){
             return response.json();
@@ -51,16 +49,13 @@ export function signup(userInfo){
             }
             return data;
         })
-    } 
 }
 
 export function createSubject(userInfo){
     return function(dispatch,getState){
         return fetch(api.BASE_URL + api.CREATE_SUBJECT_URL,{
             method : 'post',
-            headers : {
-                "Content-Type" : "application/json"
-            },
+            headers : options,
             body : JSON.stringify(userInfo)
         }).then(function(response){
             return response.json();
@@ -79,9 +74,7 @@ export function postAssignment(userData){
     return function(dispatch,getState){
         return fetch(api.BASE_URL + api.POST_ASSIGNMENT_URL,{
             method : 'post',
-            headers : {
-                "Content-Type" : "application/json"
-            },
+            headers :options,
             body : JSON.stringify(userData)
         }).then(function(response){
             return response.json();
@@ -89,7 +82,7 @@ export function postAssignment(userData){
             if(data.error){
                 throw data.error;
             }
-            dispatch(postAssigmentSuccess(data));
+            // dispatch(postAssigmentSuccess(data));
             return data;
         })
     }
@@ -100,9 +93,7 @@ export function postAnnouncement(userData){
     return function(dispatch,getState){
         return fetch(api.BASE_URL + api.POST_ANNOUNCEMENT_URL,{
             method : 'post',
-            headers : {
-                "Content-Type" : "application/json"
-            },
+            headers : options,
             body : JSON.stringify(userData)
         }).then(function(response){
             return response.json();

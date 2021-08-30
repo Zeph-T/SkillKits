@@ -123,9 +123,6 @@ export function validateUser(req,res,user,isFaculty){
     validateToken(user.authToken , TokenTypes.authToken).then(response=>{
         if(response.isValid){
             res.status(200);
-            res.cookie('AccessToken',user.authToken,{
-                expires : new Date(Date.now() + 172800000)
-            });
             return res.send(user);
         }
     }).catch(function(){
@@ -151,7 +148,7 @@ export function validateUser(req,res,user,isFaculty){
 
 export function isAuthenticatedUser(req){
     var deferred = Q.defer();
-    this.validateToken(req.cookies.AccessToken,TokenTypes.authToken).then(response=>{
+    this.validateToken(req.headers.accesstoken,TokenTypes.authToken).then(response=>{
         if(response.isValid){
             req.user = response.payload;
             if(!response.payload.isFaculty){

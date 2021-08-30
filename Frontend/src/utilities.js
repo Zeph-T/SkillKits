@@ -9,7 +9,7 @@ export const api = {
     CREATE_SUBJECT_URL  : 'api/createSubject',
     POST_ANNOUNCEMENT_URL : 'api/postAnnouncement',
     POST_ASSIGNMENT_URL : 'api/postTestOrAssignment',
-    GET_SUBJECT_DATA_URL : 'api/getSubjectData',
+    GET_SUBJECT_DATA_URL : 'api/getSubjectData/',
     SCHEDULE_CLASS_URL  :'api/scheduleClass',
     SUBMIT_ASSIGNMENT_URL : 'api/submitAssignment',
     LOGOUT_URL  : 'auth/logout',
