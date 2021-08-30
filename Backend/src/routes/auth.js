@@ -16,10 +16,7 @@ module.exports = (router) => {
 
     
     router.get('/logout',(req,res)=>{
-        res.cookie('AccessToken','',{
-            expires : new Date(Date.now())
-        });
         res.status(200);
-        res.send({});
+        return res.send({message : 'Logout Success'});
     });
 }

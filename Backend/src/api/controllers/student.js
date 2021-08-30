@@ -3,6 +3,7 @@ import Student from '../models/student';
 import { emailContexts,validateUserEmail,sendEmail ,validateUser} from "./apiHelper";
 import fetch from 'node-fetch';
 import Subject from '../models/subject';
+import mongoose from 'mongoose';
 export function signup(req,res){
     try{
         let userInfo = req.body;
@@ -83,7 +84,8 @@ export function login(req,res){
 export function getAllSubjects(req,res){
     try{
         if(req.user){
-            Subject.find({_id : {$in : req.user.activeClasses}}).then(oClasses=>{
+            let classess = req.user.activeClasses.map(oClass=> mongoose.Types.ObjectId(oClass));
+            Subject.find({_id : {$in : classess}}).then(oClasses=>{
                 return res.status(200).send(oClasses);
             }).catch(err=>{
                 return res.status(400).send({error: err.stack});

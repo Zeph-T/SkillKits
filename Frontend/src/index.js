@@ -49,13 +49,11 @@ store.dispatch(checkForLoggedInUser()).then(user => {
     })
     store.dispatch(getMyTeachingSubjects()).then(() => {
     })
-    // window.location.hash = 'home';
   } else {
     store.dispatch(getStudentSchedule()).then(() => {
     })
     store.dispatch(getMySujects()).then(() => {
     })
-    // window.location.hash = 'home';
   }
 }).catch(err => {
   window.location.hash = 'login';

@@ -15,6 +15,9 @@ const AnnouncementSchema = mongoose.Schema({
     subjectId : {
         type:mongoose.Types.ObjectId,
         ref : 'Subject'
+    },
+    postedBy : {
+        type:String
     }
 })
 

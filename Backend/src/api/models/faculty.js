@@ -9,6 +9,10 @@ const FacultySchema = mongoose.Schema({
         type : String,
         lowercase : true
     },
+    authToken : {
+        type:String,
+        default :  ""
+    },
     password  : {
         type:String
     },

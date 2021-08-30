@@ -6,6 +6,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) =>({
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) =>({
         }
     },
     media: {
-        height: 100,
+        height: 50,
     },
     header: {
         backgroundImage: "url('https://gstatic.com/classroom/themes/Physics.jpg')",
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) =>({
 
 export default function CardClass({code, data}) {
     const classes = useStyles();
-
+    const user = useSelector(state=>state.user);
     return (
         <Card className={classes.root} variant="outlined">
             <CardHeader
@@ -57,7 +58,7 @@ export default function CardClass({code, data}) {
                 title={
                     <Link to={`/subject/${data._id}`} style={{color:'white', textDecoration:'none'}} >{data.name}<p style={{fontSize:13}}>{data.classCode}</p></Link>
                 }
-                subheader={data.faculty}
+                subheader={!user.isAdmin && data.facultyNames && data.facultyNames.length > 0  ? data.facultyNames.join(' ') : ""}
                 className={classes.header}
                 subheaderTypographyProps={{color: 'white'}}
                 

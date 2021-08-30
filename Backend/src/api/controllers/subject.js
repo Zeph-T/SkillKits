@@ -53,7 +53,9 @@ export function createSubject(req,res){
             let newSubject  = new Subject;
             newSubject.name = req.body.name;
             newSubject.faculty = [];
+            newSubject.facultyNames = [];
             newSubject.faculty.push(mongoose.Types.ObjectId(req.user._id));
+            newSubject.facultyNames.push(req.user.name);
             newSubject.save(err=>{
                 if(err){
                     return res.status(400).send({error : err});

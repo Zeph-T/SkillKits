@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { useSelector } from 'react-redux';
 import Container from '@material-ui/core/Container'
 import ClassesGrid from '../Home/classesGrid';
