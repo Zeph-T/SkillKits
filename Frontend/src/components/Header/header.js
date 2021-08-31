@@ -10,6 +10,7 @@ import WrappedButton from '../common/WrappedButton';
 import { Dialog , DialogActions, DialogContent , DialogContentText , DialogTitle } from '@material-ui/core';
 import * as userActions from '../../actions/userActions';
 import * as facultyActions from '../../actions/facultyActions';
+
 const Header = (props) => {
   const dispatch = useDispatch();
   const user = useSelector(state=>state.user);
@@ -86,13 +87,13 @@ const Header = (props) => {
 
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav className='ms-auto'> 
+            <Nav className='mr-auto'> 
                {
                  user.isAdmin && <Link href="#" style={{margin:'auto' , textDecoration : 'none',marginRight : '1rem'}} color="inherit" variant="body2" onClick={()=> setOpenCreateDialog(true)} >
                  CREATE CLASS
                </Link>
                }
-              <Link href="#" style={{margin:'auto' , textDecoration : 'none',marginRight : '1rem'}} color="inherit" variant="body2" onClick={()=> setOpen(true)} >
+              <Link href="#" style={{width : 'auto', margin:'auto' , textDecoration : 'none',marginRight : '1rem'}} color="inherit" variant="body2" onClick={()=> setOpen(true)} >
                 JOIN CLASS
               </Link>
               <Link href="#" style={{margin:'auto' , textDecoration : 'none',marginRight : '1rem'}} color="inherit" variant="body2" onClick={()=> setopenLogout(true)} >

@@ -38,4 +38,9 @@ module.exports = (router) => {
     router.post('/submitAssignment',assignmentApi.submitAssignment);
     router.get('/getStudentSubjects',studentApi.getAllSubjects);
     router.get('/getFacultySubjects',apiHelper.isAdmin ,facultyApi.getAllSubjects);
+    router.get('/getUpcomingAssignments',assignmentApi.getUpcomingAssignments);
+    router.get('/getAssignments/:assignmentPostId',apiHelper.isAdmin,assignmentApi.getAssignments);
+    router.get('/assignment/:ann_id',assignmentApi.getAssignmentData);
+    router.post('/assignment/submit',apiHelper.isAdmin,assignmentApi.assignMark);
+    router.get('/getStudentAssignmentData/:assignmentPostId',assignmentApi.getStudentAssignmentData);
 }

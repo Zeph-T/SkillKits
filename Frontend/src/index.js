@@ -4,11 +4,13 @@ import configureStore from './store/configureStore';
 import initialState from './reducers/initialState';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
-import { checkForLoggedInUser, getMyTeachingSubjects, getTeachingSchedule, getMySujects, getStudentSchedule } from './actions/userActions';
+import { checkForLoggedInUser, getMyTeachingSubjects, getTeachingSchedule, getMySujects, getStudentSchedule , getUpcomingAssignments } from './actions/userActions';
 import { Route, HashRouter as Router } from 'react-router-dom';
 import App from './components/App/App';
 import './index.css';
-import './bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle";
+
 // import App from './App';
 
 const store = configureStore(initialState);
@@ -45,7 +47,7 @@ const theme = createMuiTheme({
 
 store.dispatch(checkForLoggedInUser()).then(user => {
   if (user.isAdmin) {
-    store.dispatch(getTeachingSchedule()).then(() => {
+  store.dispatch(getTeachingSchedule()).then(() => {
     })
     store.dispatch(getMyTeachingSubjects()).then(() => {
     })
@@ -54,9 +56,11 @@ store.dispatch(checkForLoggedInUser()).then(user => {
     })
     store.dispatch(getMySujects()).then(() => {
     })
+    store.dispatch(getUpcomingAssignments()).then(()=>{
+    })
   }
 }).catch(err => {
-  window.location.hash = 'login';
+  // window.location.hash = 'login';
 })
 
 render(

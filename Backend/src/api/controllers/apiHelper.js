@@ -1,5 +1,4 @@
 import nodemailer from 'nodemailer';
-import { SENDER_EMAIL_ID,SENDER_EMAIL_PASSWORD } from '../../config/env';
 import { ConfigAuth } from '../../config/token';
 import Q from 'q';
 import jwt from 'jsonwebtoken';
@@ -37,33 +36,33 @@ export function isAdmin(req,res,next){
         return res.status(400).send({error : 'Login First!'});
     }
 }
-export function sendEmail(email,context,data={}){
-    var deferred = Q.defer();
-    var transpoter = nodemailer.createTransport({
-        service : 'gmail',
-        auth : {
-            user : SENDER_EMAIL_ID,
-            pass : SENDER_EMAIL_PASSWORD 
-        }
-    });
+// export function sendEmail(email,context,data={}){
+//     var deferred = Q.defer();
+//     var transpoter = nodemailer.createTransport({
+//         service : 'gmail',
+//         auth : {
+//             user : SENDER_EMAIL_ID,
+//             pass : SENDER_EMAIL_PASSWORD 
+//         }
+//     });
 
-    var mailOptions = {
-        from  : SENDER_EMAIL_ID,
-        to : email,
-        subject : emailSubjects[context],
-        html : emailHTML[context]
-    }
-    transpoter.sendMail(mailOptions , function(err,info){
-        if(err){
-            console.log(err);
-            deferred.reject(err.message);
-        }else{
-            console.log("Email Sent " + info.response);
-            deferred.resolve(true);
-        }
-    })
-    return deferred.promise;
-}
+//     var mailOptions = {
+//         from  : SENDER_EMAIL_ID,
+//         to : email,
+//         subject : emailSubjects[context],
+//         html : emailHTML[context]
+//     }
+//     transpoter.sendMail(mailOptions , function(err,info){
+//         if(err){
+//             console.log(err);
+//             deferred.reject(err.message);
+//         }else{
+//             console.log("Email Sent " + info.response);
+//             deferred.resolve(true);
+//         }
+//     })
+//     return deferred.promise;
+// }
 
 
 export const validateUserEmail = (email ,isStudent, checkForExistingUser)=> {

@@ -19,6 +19,7 @@ import { DateTimePicker , MuiPickersUtilsProvider} from "@material-ui/pickers";
 import MomentUtils from '@date-io/moment'
 import moment from 'moment-timezone';
 import WrappedButton from '../common/WrappedButton'
+
 import * as facultyActions from '../../actions/facultyActions';
 import '../App/App.css';
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +65,7 @@ const DetailScreen = (props) => {
   useEffect(()=>{
      userActions.getSubjectData(subjectId).then(data=>{
        setAnnouncements(data.announcements);
-       setAssignments(data.assignemnts);
+       setAssignments(data.assignments);
        setClassCode(data.classCode);
        setFaculty(data.faculty);
        setName(data.name);
@@ -79,7 +80,8 @@ const DetailScreen = (props) => {
     setScheduleClassInProgress(true);
     let data = {
       subjectId : subjectId,
-      scheduledAt : timeSchedule
+      scheduledAt : timeSchedule,
+      subjectName : name
     }
     if(timeSchedule !== ""){
       dispatch(facultyActions.postSchedule(data)).then(result=>{

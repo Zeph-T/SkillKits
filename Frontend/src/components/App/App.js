@@ -11,6 +11,7 @@ import Header from '../Header/header';
 import { Container } from '@material-ui/core';
 import DetailScreen from '../user/detailScreen';
 import AssignmentDetailScreen from '../user/assignmentDetailScreen';
+import Home from '../user/home';
 import './App.css';
 /*
   
@@ -44,7 +45,7 @@ function App(props) {
   return (
     // <div className="App">
     <div>
-        {userState._id ? <Header history={props.history} theme={props.theme} /> : null}
+        {userState._id ? <Header history={props.history} theme={props.theme}openSnackBar={openSnackBar} {...props} /> : null}
       <Container>
         <Route exact path="/" render={(props)=>{
           if(userState._id){
@@ -53,6 +54,7 @@ function App(props) {
             // return <DashboardPage openSnackBar={openSnackBar} {...props} />
           }else{
             // return <
+            return <Home openSnackBar={openSnackBar} {...props} />
           }
         }} />
         {/* <Route exact path="/landing" render={()=> Component} />  create Authorisation and landing page omponents Seperately */}
@@ -60,7 +62,7 @@ function App(props) {
         <Route exact path="/signup" render={(props)=><SignUpPage openSnackBar={openSnackBar} {...props} /> } />
         <Route exact path='/home' render={(props)=><DashboardPage  openSnackBar={openSnackBar} {...props} /> } />
         <Route exact path='/subject/:subjectId' render={(props)=> <DetailScreen openSnackBar={openSnackBar} {...props} />} />
-        <Route exact path="/subject/assignment/:assignmentId" render={(props)=> <AssignmentDetailScreen openSnackBar={openSnackBar} {...props} /> } />
+        <Route exact path='/assignment/:ann_id' render={(props)=><AssignmentDetailScreen openSnackBar={openSnackBar} {...props}/>} />
         <CustomSnackBar ref={oSnackBar} />
       </Container> 
     </div> 

@@ -31,11 +31,12 @@ export function signup(req,res){
                                 if(err){
                                     return res.status(400).send({error:err.stack});
                                 }else{
-                                    sendEmail(userInfo.email,emailContexts.WELCOME).then((isValid)=>{
-                                        res.status(200).send({message : 'User Created!'});
-                                    }).catch(err=>{
-                                        return res.status(400).send({error : err.stack});
-                                    })
+                                    // return Email(userInfo.email,emailContexts.WELCOME).then((isValid)=>{
+                                    //     res.status(200).send({message : 'User Created!'});
+                                    // }).catch(err=>{
+                                    //     return res.status(400).send({error : err.stack});
+                                    // })
+                                    res.status(200).send({message : 'User Created!'});
                                 }
                             })
                         }else{

@@ -5,5 +5,6 @@ export default{
     facultySubjects : [],
     studentAssignments : [],
     postedAssignments : [],
-    schedule :[]
+    schedule :[],
+    upcomingAssignments : []
 }

@@ -13,9 +13,9 @@ export function createSubjectSuccess(subject){
     return {type : types.CREATE_SUBJECT_SUCCESS , subject};
 }
 
-// export function postAssigmentSuccess(assignment){
-//     return {type : types.POST_ASSIGNMENT_SUCCESS , assignment};
-// }
+export function postAssigmentSuccess(assignment){
+    return {type : types.POST_ASSIGNMENT_SUCCESS , assignment};
+}
 
 export function postScheduleSuccess(schedule){
     return {type : types.SCHEDULE_CLASS_SUCCESS , schedule};
@@ -86,7 +86,7 @@ export function postAssignment(userData){
             if(data.error){
                 throw data.error;
             }
-            // dispatch(postAssigmentSuccess(data));
+            dispatch(postAssigmentSuccess(data));
             return data;
         })
     }

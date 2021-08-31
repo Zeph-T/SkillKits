@@ -10,6 +10,9 @@ const AssignmentSchema = mongoose.Schema({
         type : mongoose.Types.ObjectId,
         ref : 'Student'
     },
+    submittedName : {
+        type:String
+    },
     lateSubmission : {
         type:Boolean
     },
@@ -24,6 +27,10 @@ const AssignmentSchema = mongoose.Schema({
     submittedAt : {
         type:Date,
         default  : Date.now
+    },
+marksAlloted : {
+        type:String,
+        default : ""
     }
 })
 
