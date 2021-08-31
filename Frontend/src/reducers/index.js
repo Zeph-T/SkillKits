@@ -6,7 +6,8 @@ import studentAssignments from './studentAssignmentReducer';
 import facultyAssignments from './facultyAssignmentReducer';
 import studentSubjects from './StudentSubjectReducer';
 import facultySubjects from './facultySubjectReducer';
-
+import schedule from './scheduleReducer';
+import upcomingAssignments from './upcomingAssignmentReducer';
 const appReducer = combineReducers({
     user,
     checkingForLoggedinUser,
@@ -14,6 +15,8 @@ const appReducer = combineReducers({
     facultySubjects,
     studentAssignments,
     studentSubjects,
+    schedule,
+    upcomingAssignments
 });
 
 const rootReducer = (state,action)=>{

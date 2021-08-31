@@ -16,5 +16,6 @@ export const api = {
     GET_FACULTY_SCHEDULE_URL : 'api/getFacultySchedule',
     GET_STUDENT_SCHEDULE_URL  : 'api/getSchedule',
     GET_STUDENTS_SUBJECT_URL  : 'api/getStudentSubjects',
-    GET_FACULTY_SUBJECT_URL : 'api/getFacultySubjects'
+    GET_FACULTY_SUBJECT_URL : 'api/getFacultySubjects',
+    GET_UPCOMING_ASSIGNMENTS_URL  : 'api/getUpcomingAssignments'
 }

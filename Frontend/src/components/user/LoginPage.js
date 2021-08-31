@@ -51,14 +51,14 @@ function LoginPage(props){
         if(isAdmin){
             dispatch(facultyActions.login(data)).then(result=>{
                 localStorage.setItem("AccessToken",result.authToken);
-                dispatch(userActions.getTeachingSchedule()).then(()=>{
+                dispatch(userActions.getTeachingSchedule()).then(() => {
                 })
-                dispatch(userActions.getMyTeachingSubjects()).then(()=>{
+                dispatch(userActions.getMyTeachingSubjects()).then(() => {
                 })
                 props.openSnackBar("Login Success!");
                 setLoginIsInProgress(false);
                 redirectToHomePage();
-
+                window.location.reload()
             }).catch(err=>{
                 setLoginIsInProgress(false);
                 props.openSnackBar(err.stack);
@@ -66,13 +66,15 @@ function LoginPage(props){
         }else{
             dispatch(userActions.login(data)).then(result=>{
                 localStorage.setItem("AccessToken",result.authToken);
-                dispatch(userActions.getStudentSchedule()).then(()=>{
-                });
-                dispatch(userActions.getMySujects()).then(()=>{
-                })
-                redirectToHomePage();                
-                props.openSnackBar("Login Success!");
+                    dispatch(userActions.getStudentSchedule()).then(() => {
+                    })
+                    dispatch(userActions.getMySujects()).then(() => {
+                    })
+                    dispatch(userActions.getUpcomingAssignments()).then(()=>{
+                    })
                 setLoginIsInProgress(false);
+                redirectToHomePage();
+                window.location.reload();
             }).catch(err=>{
                 setLoginIsInProgress(false);
                 props.openSnackBar(err.stack);
@@ -121,7 +123,7 @@ function LoginPage(props){
                                     className={classes.formControl}
                                     fullWidth
                                     required
-                                    type={showPassword ? "password" : "text"}
+                                    type={!showPassword ? "password" : "text"}
                                     label="Password"
                                     autoComplete="Password"
                                     name="password"

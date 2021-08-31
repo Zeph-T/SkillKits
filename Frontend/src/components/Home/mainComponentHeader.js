@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 
-function MainCompHeader() {
+function MainCompHeader(props) {
     const classes = useStyles();
 
   return (
@@ -27,6 +27,7 @@ function MainCompHeader() {
         color="primary"
         className={classes.button}
         startIcon={<CalendarToday />}
+        onClick={props.handleDrawerOpen}
       >
         Calendar
       </Button>

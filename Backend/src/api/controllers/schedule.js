@@ -7,6 +7,7 @@ export function scheduleClass(req,res){
             let newSchedule = new Schedule;
             newSchedule.subjectId = mongoose.Types.ObjectId(req.body.subjectId);
             newSchedule.scheduledAt = req.body.scheduledAt;
+            newSchedule.subjectName = req.body.subjectName
             newSchedule.save((err,doc)=>{
                 if(err) throw err;
                 else{

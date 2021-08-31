@@ -27,6 +27,10 @@ export function getScheduleSuccess(schedule){
     return {type:types.GET_MY_SCHEDULE_SUCCESS ,schedule};
 }
 
+export function upcommingAssignmentsSuccess(assignments){
+    return {type : types.GET_MY_UPCOMING_ASSIGNMENTS_SUCCESS , assignments }
+}
+
 export function logoutUserSucess(){
     return {type : types.LOGOUT_USER_SUCCESS };
 }
@@ -201,6 +205,24 @@ export function logoutUser(){
                 throw result.error;
             }
             dispatch(logoutUserSucess());
+            return result;
+        })
+    }
+}
+
+
+export function getUpcomingAssignments(){
+    return function(dispatch,getState){
+        return fetch(api.BASE_URL + api.GET_UPCOMING_ASSIGNMENTS_URL,{
+            method: 'get',
+            headers : options
+        } ).then(response=>{
+            return response.json();
+        }).then(result=>{
+            if(result.error){
+                throw result.error;
+            }
+            dispatch(upcommingAssignmentsSuccess(result));
             return result;
         })
     }
