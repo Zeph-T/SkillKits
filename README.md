@@ -25,7 +25,7 @@ The Student/Faculty is required to provide his email, username and password for 
 ### Top Navbar
 Once you are logged in, the top navbar will contain the button to join a class and a button to log out.
 <br>
-![](https://github.com/tend2infinity/Rate-It-Project/blob/master/public/screenshots/navbar.png)
+![](https://github.com/Zeph-T/SkillKits/blob/master/public/navbar.png)
 
 ### Dashboard
 All the logged in users are directed to the dashboard page where there will be the list of subjects the student/faculty is a part of.Clicking on any of the componenet would redirect them to the subject screen.
@@ -52,7 +52,7 @@ In the dashboard screen, there is a button called calendar, when clicked will di
 ### Submissions Screen
 This is for the faculty members who wants to see the assignments submitted by the students.They can grade them here itself, and the marks will be notified to that particular student.
 <br>
-![](https://github.com/Zeph-T/SkillKits/blob/master/public/submittedscreeen.png)
+![](https://github.com/Zeph-T/SkillKits/blob/master/public/submittedscreen.png)
 
 ### Join Class
 When a student clicks on the join class button in the dashboard, a dialog is opened asking for the necessary subject code, when clicked correctly will add the student to the subject.
@@ -97,9 +97,9 @@ This is a faculty operation which helps him create a class, when clicked on the 
    ```
 3. Create a .env file using the template .env.template and add values accordingly.
 4. Run the server (Note : Make sure you start the Backend server before the Frontend server to avoid unnecessary errors.)
-```
-npm start 
-```
+   ```
+   npm start 
+   ```
 
 * __Backend__
 1. change the directory to Backend
@@ -113,6 +113,6 @@ npm start
    ```
 3. Create a .env file using the template .env.template and add values accordingly.
 4. Run the server (Note
- ```
-npm start 
-```
+   ```
+   npm start 
+   ```
