@@ -95,7 +95,7 @@ This is a faculty operation which helps him create a class, when clicked on the 
    ```sh
    npm install
    ```
-3. Create a .env file using the template .env.template and add values accordingly.
+3. Create a .env file and add values accordingly.
 4. Run the server (Note : Make sure you start the Backend server before the Frontend server to avoid unnecessary errors.)
    ```
    npm start 
@@ -111,7 +111,7 @@ This is a faculty operation which helps him create a class, when clicked on the 
    ```sh
    npm install
    ```
-3. Create a .env file using the template .env.template and add values accordingly.
+3. Create a .env file and add values accordingly.
 4. Run the server (Note
    ```
    npm start 
