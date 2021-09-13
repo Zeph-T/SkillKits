@@ -19,7 +19,7 @@ The landing page gives us a brief introduction about this app. Anyone can Signup
 The Student/Faculty is required to provide his email, username and password for signup.
 <br>
 ![](https://github.com/Zeph-T/SkillKits/blob/master/public/login.png)
-![](https://github.com/Zeph-T/SkillKits/blob/master/public/singup.png)
+![](https://github.com/Zeph-T/SkillKits/blob/master/public/signup.png)
 
 
 ### Top Navbar
