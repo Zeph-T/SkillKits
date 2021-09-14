@@ -112,7 +112,7 @@ This is a faculty operation which helps him create a class, when clicked on the 
    npm install
    ```
 3. Create a .env file and add values accordingly.
-4. Run the server (Note
+4. Run the server 
    ```
    npm start 
    ```
